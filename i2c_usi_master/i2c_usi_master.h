@@ -12,9 +12,8 @@
 
 
 
-#define I2C_Rx_Boyut					16
-#define I2C_Tx_Boyut					16
-#define I2C_TIMEOUT						1000
+#define I2C_Boyut		16
+#define I2C_TIMEOUT		1000
 #define NACK			0x01
 #define SDA				PB0
 #define SCL				PB2
@@ -59,6 +58,5 @@ void i2c_send(uint8_t adr, uint8_t* str,uint8_t len);
 void i2c_read(uint8_t adr, uint8_t len);
 uint8_t i2c_gelen();
 uint8_t i2c_oku();
-//uint8_t i2c_adres_scan();
 
 #endif 
