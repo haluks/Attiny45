@@ -27,8 +27,8 @@ ISR(PCINT0_vect){
 				veri&=~0x80 ;				
 			}			
 		}
-		_delay_loop_2(stop_rx_delay);		
-		rx_bas=(rx_bas+1) & UART_Rx_Mask;
+		_delay_loop_2(stop_rx_delay);
+		rx_bas=(rx_bas+1) & UART_Rx_Mask;
 		rx_ring[rx_bas]=veri;
 	}	
 }
