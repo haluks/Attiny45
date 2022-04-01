@@ -42,19 +42,18 @@ void uart_basla(Bd_rate_t _baud){
 	PCMSK|=(1<<PCINT3);//pb3
 	GIMSK|=(1<<PCIE);
 	tx_delay = ((F_CPU / _baud) / 4)-3;
-	yarim_rx_delay=(F_CPU/_baud/8)-10;
-		if (yarim_rx_delay<=1){
-			yarim_rx_delay=1;
-		}
-	rx_delay=(F_CPU/_baud/4)-5;
-		if (rx_delay<=1){
-			rx_delay=1;
-		}
-		stop_rx_delay=(F_CPU/_baud*3/16)-4;
-		if (stop_rx_delay<=1){
-			stop_rx_delay=1;
-		}
-	
+	yarim_rx_delay=(F_CPU/_baud/8)-7;
+	if (yarim_rx_delay<=1){
+		yarim_rx_delay=1;
+	}
+	rx_delay=(F_CPU/_baud/4)-4;
+	if (rx_delay<=1){
+		rx_delay=1;
+	}
+	stop_rx_delay=(F_CPU/_baud/4)-16;
+	if (stop_rx_delay<=1){
+		stop_rx_delay=1;
+	}
 	sei();
 }
 
@@ -64,9 +63,10 @@ uint8_t uart_oku(){
 	return rx_ring[rx_son];
 }
 void uart_gonder(uint8_t uData){	
-	cli();
+	_delay_loop_2(tx_delay);
 	TX_LOW;
 	_delay_loop_2(tx_delay);
+	cli();
 	for (uint8_t i=0;i<8;i++){
 		if (uData&0x01){
 			TX_HIGH;
